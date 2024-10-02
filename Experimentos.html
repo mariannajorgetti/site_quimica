@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experimentos Químicos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background-color: #333;
+            color: rgba(255, 255, 255, 0.562);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 30px;
+            margin-right: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .mode-icon {
+            cursor: pointer;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        .light-mode header {
+            background-color: #333;
+            color: white;
+        }
+
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+
+        .dark-mode header {
+            background-color: #6cb2e0;
+            color: rgba(255, 255, 255, 0.562);
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-container {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dark-mode .text-container {
+            background-color: #555;
+            color: white;
+        }
+
+        .light-mode .text-container {
+            background-color: #e0e0e0;
+            color: black;
+        }
+
+        .beaker {
+            width: 100px;
+            height: 200px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            position: relative;
+            background-color: #fff;
+            overflow: hidden;
+            margin: 20px auto 0;
+            transition: transform 1s ease, margin-left 0.5s ease;
+            top: 230px;
+        }
+
+        /* Biquinho do béquer */
+        /* Biquinho do béquer */
+        .beaker::before {
+            content: '';
+            width: 20px;
+            height: 15px;
+            border: 2px solid #000;
+            position: absolute;
+            top: -2px;
+            right: -10px;
+            border-radius: 0 0 20px 20px;
+            border-top: none;
+            background-color: white;
+        }
+
+
+        /* Marcas de volume */
+        .volume-marker {
+            width: 10px;
+            height: 1px;
+            background-color: #000;
+            position: absolute;
+            left: 10px;
+        }
+
+        /* Posicionamento das marcas de volume */
+        .marker-20 {
+            bottom: 20%;
+        }
+
+        .marker-40 {
+            bottom: 40%;
+        }
+
+        .marker-60 {
+            bottom: 60%;
+        }
+
+        .marker-80 {
+            bottom: 80%;
+        }
+
+        /* Parte líquida do béquer */
+        .liquid {
+            width: 100%;
+            height: 40%;
+            background-color: rgb(180, 180, 180);
+            position: absolute;
+            bottom: 0;
+            transition: height 0.3s ease, background-color 0.5s ease;
+        }
+
+        /* Béquer que será ocultado inicialmente */
+        .beaker-hidden {
+            display: none;
+        }
+
+
+        .bico-bunsen {
+            width: 100px;
+            height: 20px;
+            background-color: #878787;
+            /* Esta linha define o fundo cinza */
+            position: relative;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            /* Esta linha cria a sombra */
+            left: 300px;
+            top: -100px;
+        }
+
+
+
+        .bico-bunsen::before {
+            content: '';
+            width: 25px;
+            height: 125px;
+            background-color: #444;
+            position: absolute;
+            top: 150px;
+            left: 40%;
+            transform: translateY(-210%);
+            border-radius: 5px;
+            border: 3px solid #333;
+        }
+
+        .flame {
+            width: 0;
+            height: 0;
+            position: absolute;
+            bottom: 100%;
+            left: 43%;
+            transform: translateY(-250%);
+            transition: width 1s, height 1s, opacity 1s;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 204, 0, 1) 0%, rgba(255, 102, 0, 1) 40%, rgba(255, 0, 0, 0) 100%);
+            opacity: 0;
+            /* Começa invisível */
+            top: -65px;
+        }
+
+        @keyframes flicker {
+            0% {
+                height: 30px;
+                width: 20px;
+                opacity: 1;
+            }
+
+            10% {
+                height: 28px;
+                width: 19px;
+                opacity: 0.9;
+            }
+
+            20% {
+                height: 27px;
+                width: 20px;
+                opacity: 0.85;
+            }
+
+            30% {
+                height: 26px;
+                width: 21px;
+                opacity: 0.8;
+            }
+
+            40% {
+                height: 25px;
+                width: 22px;
+                opacity: 0.75;
+            }
+
+            50% {
+                height: 24px;
+                width: 23px;
+                opacity: 0.8;
+            }
+
+            60% {
+                height: 25px;
+                width: 22px;
+                opacity: 0.75;
+            }
+
+            70% {
+                height: 26px;
+                width: 21px;
+                opacity: 0.8;
+            }
+
+            80% {
+                height: 27px;
+                width: 20px;
+                opacity: 0.85;
+            }
+
+            90% {
+                height: 28px;
+                width: 19px;
+                opacity: 0.9;
+            }
+
+            100% {
+                height: 30px;
+                width: 20px;
+                opacity: 1;
+            }
+        }
+
+        .bico-bunsen:hover .flame {
+            animation: flicker 1s infinite alternate;
+            /* Aumente a duração para suavizar */
+        }
+
+
+        .flame-orange {
+            background: radial-gradient(circle, #FFCC00 0%, #FF6600 40%, rgba(255, 0, 0, 0) 100%);
+        }
+
+        .flame-green {
+            background: radial-gradient(circle, #00FF00 0%, #009600 40%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .flame-blue {
+            background: radial-gradient(circle, #0000FF 0%, #000096 40%, rgba(0, 0, 0, 0) 100%);
+        }
+
+
+        .bico-container {
+            display: flex;
+            justify-content: flex-start;
+            /* Ajustado para aproximar os bicos */
+            gap: 10px;
+            /* Adicionando um espaço fixo entre os bicos */
+            margin-top: 5px;
+            padding: 0 400px;
+        }
+
+        .tower {
+            width: 100px;
+            height: 400px;
+            border: 2px solid #000;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            top: -250px;
+            right: -270px;
+        }
+
+        .layer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transition: height 1s ease-in-out;
+        }
+
+        .layer1 {
+            background-color: #ff9999;
+            height: 0%;
+        }
+
+        .layer2 {
+            background-color: #99ff99;
+            height: 0%;
+        }
+
+        .layer3 {
+            background-color: #9999ff;
+            height: 0%;
+        }
+
+        .layer4 {
+            background-color: #ffff99;
+            height: 0%;
+        }
+
+        /* Posicionamento das camadas */
+        .layer1 {
+            bottom: 0;
+        }
+
+        .layer2 {
+            bottom: 20%;
+        }
+
+        .layer3 {
+            bottom: 50%;
+        }
+
+        .layer4 {
+            bottom: 75%;
+        }
+
+        .liquid {
+            width: 100%;
+            height: 40%;
+            background-color: rgb(180, 180, 180);
+            position: absolute;
+            bottom: 0;
+            transition: height 0.3s ease, background-color 0.5s ease;
+        }
+
+        /* Pasta de Elefante - Animação */
+        /* Béquer */
+        .beaker {
+            width: 100px;
+            height: 200px;
+            border: 2px solid #000;
+            border-radius: 10px;
+            position: relative;
+            background-color: #fff;
+            overflow: visible;
+            /* Permitir que a pasta transborde para fora */
+            margin: 20px auto;
+            transition: transform 1s ease;
+        }
+
+        /* Animação Pasta de Elefante Revisada */
+        @keyframes pastaElefanteErupcao {
+            0% {
+                height: 0%;
+                /* Começa no fundo */
+                transform: scaleY(1);
+                /* Sem aumento horizontal */
+            }
+
+            50% {
+                height: 120%;
+                /* Cresce dentro do beaker */
+                transform: scaleY(1.1);
+                /* Cresce levemente só na altura */
+            }
+
+            100% {
+                height: 130%;
+                /* Cresce levemente para fora */
+                transform: scaleY(1.15);
+                /* Continua crescendo apenas na altura */
+            }
+        }
+
+        .liquid-pasta {
+            background-color: #ffcc00;
+            /* Cor da pasta */
+            width: 100%;
+            /* Mantém a largura do beaker */
+            height: 0%;
+            /* Começa vazio */
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transform-origin: bottom;
+            /* Define o ponto de origem */
+            animation: none;
+            /* Sem animação até ser acionada */
+            transition: height 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .ajustar {
+            transform: translateY(-350%);
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+
+    <header>
+        <div class="logo">
+            <a href="#home"><i class="fas fa-flask"></i>Experimentos Químicos</a>
+        </div>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="Experimentos.html">Experimentos</a>
+            <a href="cientistas.html">Cientistas</a>
+            <a href="tabela.html">Tabela Periódica</a>
+        </nav>
+        <button class="mode-icon" onclick="toggleMode()">🌙</button>
+    </header>
+
+    <div class="content">
+        <div class="text-container">
+            <h1>Experimentos Químicos</h1>
+            <p>Bem-vindo à seção de experimentos químicos! Aqui você encontrará uma variedade de experimentos
+                interessantes que você pode realizar. Explore e divirta-se aprendendo mais sobre a química!</p>
+        </div>
+        <div class="lab-container">
+            <!-- Béquer 2 será visível inicialmente -->
+            <div class="beaker" id="beaker2" style="left: -500px;" data-bs-toggle="modal" data-bs-target="#modalIodo">
+                <div class="liquid" id="liquid2"></div>
+                <!-- Adicionando marcas de volume -->
+                <div class="volume-marker marker-20"></div>
+                <div class="volume-marker marker-40"></div>
+                <div class="volume-marker marker-60"></div>
+                <div class="volume-marker marker-80"></div>
+            </div>
+
+            <!-- Béquer 1 será oculto inicialmente -->
+            <div class="beaker beaker-hidden" id="beaker1" style="left: -500px;" data-bs-toggle="modal"
+                data-bs-target="#modalIodo">
+                <div class="liquid" id="liquid1"></div>
+                <!-- Adicionando marcas de volume -->
+                <div class="volume-marker marker-20"></div>
+                <div class="volume-marker marker-40"></div>
+                <div class="volume-marker marker-60"></div>
+                <div class="volume-marker marker-80"></div>
+
+
+
+            </div>
+            <div class="bico-container">
+                <div class="bico-bunsen" data-bs-toggle="modal" data-bs-target="#modalOrange">
+                    <div class="flame flame-orange"></div>
+                </div>
+                <div class="bico-bunsen" data-bs-toggle="modal" data-bs-target="#modalGreen">
+                    <div class="flame flame-green"></div>
+                </div>
+                <div class="bico-bunsen" data-bs-toggle="modal" data-bs-target="#modalBlue">
+                    <div class="flame flame-blue"></div>
+                </div>
+            </div>
+
+            <!-- Modal para Bico Laranja -->
+            <div class="modal fade" id="modalOrange" tabindex="-1" aria-labelledby="modalLabelOrange"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabelOrange">Bico de Bunsen Laranja</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            O bico de Bunsen laranja é ideal para reações que requerem uma chama mais quente e
+                            brilhante. É amplamente utilizado em experimentos de aquecimento e combustão.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal para Bico Verde -->
+            <div class="modal fade" id="modalGreen" tabindex="-1" aria-labelledby="modalLabelGreen" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabelGreen">Bico de Bunsen Verde</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            O bico de Bunsen verde é usado para experimentos que exigem uma chama mais controlada e
+                            menos intensa, ideal para reações mais delicadas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal para Bico Azul -->
+            <div class="modal fade" id="modalBlue" tabindex="-1" aria-labelledby="modalLabelBlue" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabelBlue">Bico de Bunsen Azul</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            O bico de Bunsen azul é ideal para reações que requerem uma chama limpa e controlada, sendo
+                            amplamente utilizado em experimentos de química orgânica.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal fade" id="modaltower" tabindex="-1" aria-labelledby="modalLabeltower" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabeltower">Torre de Líquidos</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        A torre de líquidos é um equipamento utilizado para a separação de líquidos com diferentes
+                        densidades e
+                        propriedades. É frequentemente utilizada em experimentos de destilação e análise de soluções.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalIodo" tabindex="-1" aria-labelledby="modalLabelIodo" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabelIodo">Relógio de Iodo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        O relógio de iodo é um experimento clássico que demonstra a cinética de reações químicas. Ele
+                        envolve a
+                        adição de soluções de iodeto e um agente oxidante, resultando em uma mudança de cor que indica a
+                        progressão da reação. Este experimento é amplamente utilizado para estudar a dinâmica de reações
+                        em
+                        química.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="tower" data-bs-toggle="modal" data-bs-target="#modaltower">
+            <div class="layer layer1"></div>
+            <div class="layer layer2"></div>
+            <div class="layer layer3"></div>
+            <div class="layer layer4"></div>
+        </div>
+
+        <!-- Béquer da Pasta de Elefante -->
+        <div class="ajustar">
+            <div class="beaker" id="beakerPasta" style="left: -100px;" data-bs-toggle="modal"
+                data-bs-target="#modalPasta">
+                <div class="liquid liquid-pasta" id="liquidPasta"></div>
+                <!-- Marcas de volume -->
+                <div class="volume-marker marker-20"></div>
+                <div class="volume-marker marker-40"></div>
+                <div class="volume-marker marker-60"></div>
+                <div class="volume-marker marker-80"></div>
+            </div>
+
+        </div>
+
+        <!-- Modal para Pasta de Elefante -->
+        <div class="modal fade" id="modalPasta" tabindex="-1" aria-labelledby="modalLabelPasta" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabelPasta">Pasta de Elefante</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        A pasta de elefante é uma reação química entre peróxido de hidrogênio, detergente e levedura,
+                        resultando em uma rápida liberação de espuma, criando uma erupção semelhante a uma pasta
+                        gigante.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            // Alterna o modo claro e escuro
+            function toggleMode() {
+                const body = document.body;
+                const button = document.querySelector('.mode-icon');
+                const textContainer = document.querySelector('.text-container');
+
+                if (body.classList.contains('light-mode')) {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    button.textContent = '☀️';
+                    textContainer.classList.add('dark-mode');
+                } else {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    button.textContent = '🌙';
+                    textContainer.classList.remove('dark-mode');
+                }
+            }
+
+            // Animação dos béqueres
+            const beaker1 = document.getElementById('beaker1');
+            const liquid1 = document.getElementById('liquid1');
+            const beaker2 = document.getElementById('beaker2');
+            const liquid2 = document.getElementById('liquid2');
+
+            let isPouring = false;
+
+            beaker2.addEventListener('mouseenter', () => {
+                if (!isPouring) {
+                    isPouring = true;
+
+                    // Rotacionar e mover o béquer 2 para a esquerda
+                    beaker2.style.transform = 'rotate(135deg)';
+                    beaker2.style.marginLeft = '450px';
+
+                    // Mostrar o béquer 1 e mover para a direita
+                    beaker1.classList.remove('beaker-hidden');
+                    beaker1.style.marginLeft = '550px';
+
+                    // Esvazia o béquer 2
+                    setTimeout(() => {
+                        liquid2.style.height = '0%';
+                    }, 1000);
+
+                    // Enche o béquer 1
+                    setTimeout(() => {
+                        liquid1.style.height = '80%';
+                        liquid1.style.backgroundColor = 'black';
+                    }, 1000); // Atraso para encher o béquer 1
+
+                    // Restaura os béqueres após 5 segundos
+                    setTimeout(() => {
+                        liquid2.style.height = '40%'; // Nível original do béquer 2
+                        liquid1.style.height = '40%'; // Nível original do béquer 1
+                        liquid1.style.backgroundColor = 'rgb(180, 180, 180)'; // Cor original
+                        beaker2.style.transform = 'rotate(0deg)'; // Volta o béquer 2 à posição original
+                        beaker2.style.marginLeft = '550'; // Remove o deslocamento lateral
+                        beaker1.classList.add('beaker-hidden'); // Esconde o béquer 1 novamente
+                        beaker1.style.marginLeft = '550'; // Remove o deslocamento lateral do béquer 1
+                        isPouring = false; // Permite nova animação
+                    }, 5000); // Tempo total da animação
+                }
+            });
+
+            // Selecionar todos os bicos de Bunsen
+            const bicos = document.querySelectorAll('.bico-bunsen');
+            const flames = document.querySelectorAll('.flame');
+
+            bicos.forEach(bico => {
+                let timeoutId;
+
+                bico.addEventListener('mouseenter', () => {
+                    flames.forEach(flame => {
+                        flame.style.width = '20px';
+                        flame.style.height = '30px';
+                        flame.style.opacity = '1';
+                        flame.style.animation = 'flicker 1.5s infinite alternate'; // Aumente a duração para suavizar
+                    });
+
+                    // Limpa o timeout anterior, se existir
+                    clearTimeout(timeoutId);
+                });
+
+                bico.addEventListener('mouseleave', () => {
+                    // Define um timeout para parar a animação após 2 segundos
+                    timeoutId = setTimeout(() => {
+                        flames.forEach(flame => {
+                            flame.style.width = '0';
+                            flame.style.height = '0';
+                            flame.style.opacity = '0';
+                            flame.style.animation = 'none';
+                        });
+                    }, 3000); // 2000 ms = 2 segundos
+                });
+            });
+
+            window.onload = function () {
+                const layer1 = document.querySelector('.layer1');
+                const layer2 = document.querySelector('.layer2');
+                const layer3 = document.querySelector('.layer3');
+                const layer4 = document.querySelector('.layer4');
+
+                // Animação das camadas
+                setTimeout(() => { layer1.style.height = '20%'; }, 500);
+                setTimeout(() => { layer2.style.height = '30%'; }, 1500);
+                setTimeout(() => { layer3.style.height = '17%'; }, 2500);
+                setTimeout(() => { layer4.style.height = '33%'; }, 3500);
+            };
+
+            // Seleciona o beaker e o líquido da Pasta de Elefante
+            const beakerPasta = document.getElementById('beakerPasta');
+            const liquidPasta = document.getElementById('liquidPasta');
+
+            // Adiciona evento para iniciar a animação
+            beakerPasta.addEventListener('mouseenter', () => {
+                // Ativa a animação de erupção
+                liquidPasta.style.animation = 'pastaElefanteErupcao 3s ease forwards';
+
+                // Reseta a animação após 5 segundos para permitir repetir
+                setTimeout(() => {
+                    liquidPasta.style.animation = 'none'; // Reseta a animação
+                    liquidPasta.style.height = '0%'; // Volta para o estado inicial
+                }, 5000); // Duração total da animação
+            });
+
+
+
+        </script>
+
+</body>
+
+</html>

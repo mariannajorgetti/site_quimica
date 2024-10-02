@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cientistas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        header {
+            background-color: #6cb2e0;
+            color: rgba(255, 255, 255, 0.562);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 30px;
+            margin-right: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .search-and-filter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 200px;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .filter-buttons button {
+            padding: 6px 10px;
+            border: 1px solid;
+            border-radius: 4px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+/* Cores dos botões */
+.filter-buttons button[data-letter="A"] {
+    background-color: #8e24aa; /* Roxo suave */
+}
+
+.filter-buttons button[data-letter="B"] {
+    background-color: #7b1fa2; /* Roxo mais escuro */
+}
+
+.filter-buttons button[data-letter="C"] {
+    background-color: #5e35b1; /* Roxo médio */
+}
+
+.filter-buttons button[data-letter="D"] {
+    background-color: #3949ab; /* Azul suave */
+}
+
+.filter-buttons button[data-letter="E"] {
+    background-color: #1e88e5; /* Azul médio */
+}
+
+.filter-buttons button[data-letter="F"] {
+    background-color: #0288d1; /* Azul escuro */
+}
+
+.filter-buttons button[data-letter="G"] {
+    background-color: #039be5; /* Azul claro */
+}
+
+.filter-buttons button[data-letter="H"] {
+    background-color: #0288d1; /* Azul suave */
+}
+
+.filter-buttons button[data-letter="I"] {
+    background-color: #03a9f4; /* Azul médio */
+}
+
+.filter-buttons button[data-letter="J"] {
+    background-color: #00acc1; /* Azul turquesa */
+}
+
+.filter-buttons button[data-letter="K"] {
+    background-color: #00bcd4; /* Azul celeste */
+}
+
+.filter-buttons button[data-letter="L"] {
+    background-color: #4db6ac; /* Verde suave */
+}
+
+.filter-buttons button[data-letter="M"] {
+    background-color: #009688; /* Verde escuro */
+}
+
+.filter-buttons button[data-letter="N"] {
+    background-color: #00796b; /* Verde médio */
+}
+
+.filter-buttons button[data-letter="O"] {
+    background-color: #004d40; /* Verde escuro */
+}
+
+.filter-buttons button[data-letter="P"] {
+    background-color: #388e3c; /* Verde mais claro */
+}
+
+.filter-buttons button[data-letter="Q"] {
+    background-color: #2c6b5d; /* Verde escuro */
+}
+
+.filter-buttons button[data-letter="R"] {
+    background-color: #4caf50; /* Verde médio */
+}
+
+.filter-buttons button[data-letter="S"] {
+    background-color: #388e3c; /* Verde mais claro */
+}
+
+.filter-buttons button[data-letter="T"] {
+    background-color: #33691e; /* Verde oliva */
+}
+
+.filter-buttons button[data-letter="U"] {
+    background-color: #2c6b5d; /* Verde escuro */
+}
+
+.filter-buttons button[data-letter="V"] {
+    background-color: #004d40; /* Verde escuro */
+}
+
+.filter-buttons button[data-letter="W"] {
+    background-color: #003c8f; /* Azul escuro */
+}
+
+.filter-buttons button[data-letter="X"] {
+    background-color: #01579b; /* Azul escuro */
+}
+
+.filter-buttons button[data-letter="Y"] {
+    background-color: #006064; /* Azul marinho */
+}
+
+.filter-buttons button[data-letter="Z"] {
+    background-color: #004d40; /* Verde escuro */
+}
+
+.filter-buttons button:hover {
+    opacity: 0.9; /* Menos intenso no hover */
+}
+
+
+        .light-mode .filter-buttons button {
+            border-color: #333;
+        }
+
+        .dark-mode .filter-buttons button {
+            border-color: #666;
+        }
+
+        .scientist-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .scientist {
+            text-align: center;
+            width: 150px;
+            cursor: pointer;
+        }
+
+        .scientist img {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 2px solid #333;
+        }
+
+        .scientist p {
+            margin: 10px 0 0;
+            font-size: 16px;
+        }
+
+        .mode-icon {
+            cursor: pointer;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: white;
+        }
+
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        .light-mode header {
+            background-color: #333;
+            color: white;
+        }
+
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+
+        .dark-mode header {
+            background-color: #6cb2e0;
+            color: rgba(255, 255, 255, 0.562);
+        }
+
+        /* Estilos do Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="light-mode">
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><i class="fas fa-flask"></i> Voltar para Elementos Químicos</a>
+        </div>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="Experimentos.html">Experimentos</a>
+            <a href="cientistas.html">Cientistas</a>
+            <a href="tabela.html">Tabela Periodica</a>
+            <input type="text" id="search-box" class="search-box" placeholder="Buscar cientistas...">
+        </nav>
+        <button class="mode-icon" onclick="toggleMode()">🌙</button>
+    </header>
+
+    <div class="scientists">
+        <center>
+            <h2>Cientistas</h2>
+        </center>
+        <div class="search-and-filter">
+            <div class="filter-buttons">
+                <button type="button" class="btn" data-letter="A" onclick="filterByLetter('A')">A</button>
+                <button type="button" class="btn" data-letter="B" onclick="filterByLetter('B')">B</button>
+                <button type="button" class="btn" data-letter="C" onclick="filterByLetter('C')">C</button>
+                <button type="button" class="btn" data-letter="D" onclick="filterByLetter('D')">D</button>
+                <button type="button" class="btn" data-letter="E" onclick="filterByLetter('E')">E</button>
+                <button type="button" class="btn" data-letter="F" onclick="filterByLetter('F')">F</button>
+                <button type="button" class="btn" data-letter="G" onclick="filterByLetter('G')">G</button>
+                <button type="button" class="btn" data-letter="H" onclick="filterByLetter('H')">H</button>
+                <button type="button" class="btn" data-letter="I" onclick="filterByLetter('I')">I</button>
+                <button type="button" class="btn" data-letter="J" onclick="filterByLetter('J')">J</button>
+                <button type="button" class="btn" data-letter="K" onclick="filterByLetter('K')">K</button>
+                <button type="button" class="btn" data-letter="L" onclick="filterByLetter('L')">L</button>
+                <button type="button" class="btn" data-letter="M" onclick="filterByLetter('M')">M</button>
+                <button type="button" class="btn" data-letter="N" onclick="filterByLetter('N')">N</button>
+                <button type="button" class="btn" data-letter="O" onclick="filterByLetter('O')">O</button>
+                <button type="button" class="btn" data-letter="P" onclick="filterByLetter('P')">P</button>
+                <button type="button" class="btn" data-letter="Q" onclick="filterByLetter('Q')">Q</button>
+                <button type="button" class="btn" data-letter="R" onclick="filterByLetter('R')">R</button>
+                <button type="button" class="btn" data-letter="S" onclick="filterByLetter('S')">S</button>
+                <button type="button" class="btn" data-letter="T" onclick="filterByLetter('T')">T</button>
+                <button type="button" class="btn" data-letter="U" onclick="filterByLetter('U')">U</button>
+                <button type="button" class="btn" data-letter="V" onclick="filterByLetter('V')">V</button>
+                <button type="button" class="btn" data-letter="W" onclick="filterByLetter('W')">W</button>
+                <button type="button" class="btn" data-letter="X" onclick="filterByLetter('X')">X</button>
+                <button type="button" class="btn" data-letter="Y" onclick="filterByLetter('Y')">Y</button>
+                <button type="button" class="btn" data-letter="Z" onclick="filterByLetter('Z')">Z</button>
+            </div>
+        </div>
+        <div id="scientist-list" class="scientist-list"></div>
+    </div>
+
+    <!-- Estrutura do Modal -->
+    <div id="scientist-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div id="modal-body">
+                <!-- Conteúdo do modal será inserido aqui pelo JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scientistListElement = document.getElementById('scientist-list');
+        const searchBox = document.getElementById('search-box');
+        const modal = document.getElementById('scientist-modal');
+        const modalBody = document.getElementById('modal-body');
+        const closeButton = document.querySelector('.close-button');
+
+        // Adiciona dados de biografia dos cientistas
+        const scientists = [
+            { name: 'Ada Lovelace', letter: 'A', img: 'Fotos/ada_lovelace.jpg', bio: 'Pioneira da programação de computadores, Ada Lovelace escreveu o primeiro algoritmo destinado a ser processado por uma máquina.' },
+            { name: 'Albert Einstein', letter: 'A', img: 'Fotos/albert_einstein.jpg', bio: 'Físico teórico que desenvolveu a teoria da relatividade, uma das duas principais teorias da física moderna.' },
+            { name: 'Barbara McClintock', letter: 'B', img: 'Fotos/barbara_mcclintock.jpg', bio: 'Geneticista que descobriu os elementos móveis no DNA, conhecidos como transposões.' },
+            { name: 'Blaise Pascal', letter: 'B', img: 'Fotos/blaise_pascal.jpg', bio: 'Matemático e físico francês, conhecido por suas contribuições à teoria da probabilidade e por inventar a primeira calculadora mecânica.' },
+            { name: 'Carl Sagan', letter: 'C', img: 'Fotos/carl_sagan.jpg', bio: 'Astrônomo e cosmólogo, popularizou a ciência e foi um dos principais defensores da exploração espacial.' },
+            { name: 'Charles Darwin', letter: 'C', img: 'Fotos/charles_darwin.jpg', bio: 'Naturalista que formulou a teoria da evolução por seleção natural, revolucionando a biologia.' },
+            { name: 'David Attenborough', letter: 'D', img: 'Fotos/david_attenborough.jpg', bio: 'Naturalista e apresentador de televisão britânico, conhecido por seus documentários sobre a vida selvagem.' },
+            { name: 'Dmitri Mendeleev', letter: 'D', img: 'Fotos/dmitri_mendeleev.jpg', bio: 'Químico que criou a tabela periódica dos elementos, organizando os elementos químicos de forma sistemática.' },
+            { name: 'Eileen Collins', letter: 'E', img: 'Fotos/eileen_collins.jpg', bio: 'Primeira mulher a comandar uma missão do ônibus espacial da NASA.' },
+            { name: 'Enrico Fermi', letter: 'E', img: 'Fotos/enrico_fermi.jpg', bio: 'Físico que trabalhou no desenvolvimento da primeira reação nuclear controlada.' },
+            { name: 'Fermat Pierre de', letter: 'F', img: 'Fotos/fermat_pierre_de.jpg', bio: 'Matemático francês conhecido por seu último teorema, que permaneceu não provado até o final do século XX.' },
+            { name: 'Francis Crick', letter: 'F', img: 'Fotos/francis_crick.jpg', bio: 'Co-descobridor da estrutura do DNA, que estabeleceu as bases para a biologia molecular.' },
+            { name: 'Galileo Galilei', letter: 'G', img: 'Fotos/galileo_galilei.jpg', bio: 'Astrônomo e físico italiano, cujas observações ajudaram a confirmar a teoria heliocêntrica.' },
+            { name: 'Gerty Cori', letter: 'G', img: 'Fotos/gerty_cori.jpg', bio: 'Bioquímica que foi a primeira mulher a ganhar o Prêmio Nobel de Fisiologia ou Medicina.' },
+            { name: 'Isaac Newton', letter: 'I', img: 'Fotos/isaac_newton.jpg', bio: 'Matemático e físico inglês, cujas leis do movimento e da gravitação universal são fundamentais na física.' },
+            { name: 'Irène Joliot-Curie', letter: 'I', img: 'Fotos/irene_joliot_curie.jpg', bio: 'Química que, junto com seu marido, descobriu a radioatividade artificial.' },
+            { name: 'James Clerk Maxwell', letter: 'J', img: 'Fotos/james_clerk_maxwell.jpg', bio: 'Físico teórico que formulou as equações que descrevem o comportamento do eletromagnetismo.' },
+            { name: 'Jane Goodall', letter: 'J', img: 'Fotos/jane_goodall.jpg', bio: 'Primatóloga conhecida por seu trabalho revolucionário com chimpanzés na natureza.' },
+            { name: 'Kurt Gödel', letter: 'K', img: 'Fotos/kurt_godel.jpg', bio: 'Lógico e matemático, famoso por seus teoremas da incompletude que têm profundas implicações na lógica matemática.' },
+            { name: 'Katherine Johnson', letter: 'K', img: 'Fotos/katherine_johnson.jpg', bio: 'Matemática cujas habilidades de cálculo foram fundamentais para os primeiros voos espaciais da NASA.' },
+            { name: 'Leonhard Euler', letter: 'L', img: 'Fotos/leonhard_euler.jpg', bio: 'Matemático suíço que fez contribuições significativas em muitos campos da matemática, incluindo a teoria dos grafos e a análise matemática.' },
+            { name: 'Lise Meitner', letter: 'L', img: 'Fotos/lise_meitner.jpg', bio: 'Física que, junto com Otto Hahn, descobriu a fissão nuclear.' },
+            { name: 'Marie Curie', letter: 'M', img: 'Fotos/marie_curie.jpg', bio: 'Pioneira na pesquisa sobre radioatividade, e a primeira pessoa a ganhar dois Prêmios Nobel em áreas diferentes.' },
+            { name: 'Michael Faraday', letter: 'M', img: 'Fotos/michael_faraday.jpg', bio: 'Cientista britânico cujas descobertas sobre eletricidade e magnetismo foram fundamentais para o desenvolvimento da tecnologia elétrica.' },
+            { name: 'Niels Bohr', letter: 'N', img: 'Fotos/niels_bohr.jpg', bio: 'Físico que desenvolveu o modelo atômico de Bohr e foi um dos principais arquitetos da teoria quântica.' },
+            { name: 'Norbert Wiener', letter: 'N', img: 'Fotos/norbert_wiener.jpg', bio: 'Matemático conhecido por fundar a cibernética, o estudo do controle e comunicação em animais e máquinas.' },
+            { name: 'Otto Hahn', letter: 'O', img: 'Fotos/otto_hahn.jpg', bio: 'Químico que descobriu a fissão nuclear, trabalho que levou ao desenvolvimento da energia nuclear.' },
+            { name: 'Olga Ladyzhenskaya', letter: 'O', img: 'Fotos/olga_ladyzhenskaya.jpg', bio: 'Matemática russa conhecida por seu trabalho em equações diferenciais parciais e dinâmica dos fluidos.' },
+            { name: 'Paul Dirac', letter: 'P', img: 'Fotos/paul_dirac.jpg', bio: 'Físico teórico que fez contribuições fundamentais à mecânica quântica e à teoria quântica de campos.' },
+            { name: 'Pierre Curie', letter: 'P', img: 'Fotos/pierre_curie.jpg', bio: 'Físico que, junto com sua esposa Marie Curie, fez descobertas importantes sobre a radioatividade.' },
+            { name: 'Rosalind Franklin', letter: 'R', img: 'Fotos/rosalind_franklin.jpg', bio: 'Química cuja técnica de difração de raios X foi crucial para a descoberta da estrutura do DNA.' },
+            { name: 'Richard Feynman', letter: 'R', img: 'Fotos/richard_feynman.jpg', bio: 'Físico teórico conhecido por suas contribuições à mecânica quântica e por seus livros de divulgação científica.' },
+            { name: 'Stephen Hawking', letter: 'S', img: 'Fotos/stephen_hawking.jpg', bio: 'Cosmólogo e físico teórico famoso por seu trabalho sobre buracos negros e a teoria do Big Bang.' },
+            { name: 'Srinivasa Ramanujan', letter: 'S', img: 'Fotos/srinivasa_ramanujan.jpg', bio: 'Matemático autodidata cuja intuição e habilidades extraordinárias tiveram um impacto duradouro na matemática.' },
+            { name: 'Alan Turing', letter: 'T', img: 'Fotos/turing_alan.jpg', bio: 'Matemático e cientista da computação, considerado um dos pais da ciência da computação e da inteligência artificial.' },
+            { name: 'Thomas Edison', letter: 'T', img: 'Fotos/thomas_edison.jpg', bio: 'Inventor e empresário conhecido por desenvolver a lâmpada incandescente e muitos outros dispositivos inovadores.' },
+            { name: 'Ursula Franklin', letter: 'U', img: 'Fotos/ursula_franklin.jpg', bio: 'Física e professora conhecida por suas contribuições à física experimental e ao ativismo social.' },
+            { name: 'Upton Sinclair', letter: 'U', img: 'Fotos/upton_sinclair.jpg', bio: 'Escritor e ativista social conhecido por seu trabalho na defesa de reformas sociais e trabalhistas.' },
+            { name: 'Vera Rubin', letter: 'V', img: 'Fotos/vera_rubin.jpg', bio: 'Astrônoma que forneceu evidências importantes para a existência de matéria escura no universo.' },
+            { name: 'William Ramsay', letter: 'W', img: 'Fotos/william_ramsay.jpg', bio: 'Químico que descobriu os gases nobres e foi premiado com o Nobel de Química.' },
+            { name: 'Xavier Le Verrier', letter: 'X', img: 'Fotos/xavier_le_verrier.jpg', bio: 'Astrônomo que previu a existência do planeta Netuno com base em cálculos matemáticos.' },
+            { name: 'Zacharias Janssen', letter: 'Z', img: 'Fotos/zacharias_janssen.jpg', bio: 'Inventor do microscópio composto, que possibilitou a observação de estruturas microscópicas.' }
+        ];
+
+        // Função para renderizar os cientistas
+        function renderScientists(filteredScientists) {
+            scientistListElement.innerHTML = '';
+            filteredScientists.forEach(scientist => {
+                const scientistDiv = document.createElement('div');
+                scientistDiv.className = 'scientist';
+                scientistDiv.innerHTML = `
+                <img src="${scientist.img}" alt="${scientist.name}">
+                <p>${scientist.name}</p>
+            `;
+                scientistDiv.addEventListener('click', () => showModal(scientist));
+                scientistListElement.appendChild(scientistDiv);
+            });
+        }
+
+        // Função para exibir o modal com a biografia
+        function showModal(scientist) {
+            modalBody.innerHTML = `
+            <h2>${scientist.name}</h2>
+            <img src="${scientist.img}" alt="${scientist.name}" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;"/>
+            <p>${scientist.bio}</p>
+        `;
+            modal.style.display = 'block';
+        }
+
+        // Função para fechar o modal
+        closeButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        function filterByLetter(letter) {
+            const filteredScientists = scientists.filter(scientist => scientist.letter === letter);
+            renderScientists(filteredScientists);
+        }
+
+        function filterBySearch(query) {
+            const normalizedQuery = query.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            const filteredScientists = scientists.filter(scientist => {
+                const normalizedName = scientist.name.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+                return normalizedName.includes(normalizedQuery);
+            });
+            renderScientists(filteredScientists);
+        }
+
+        function toggleMode() {
+            const body = document.body;
+            const isLightMode = body.classList.contains('light-mode');
+            if (isLightMode) {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                document.querySelector('.mode-icon').innerText = '🌞'; // Mudar o ícone para sol no modo escuro
+            } else {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                document.querySelector('.mode-icon').innerText = '🌙'; // Mudar o ícone para lua no modo claro
+            }
+        }
+
+        searchBox.addEventListener('input', (event) => {
+            filterBySearch(event.target.value);
+        });
+
+        // Renderizar todos os cientistas ao carregar a página
+        renderScientists(scientists);
+    </script>
+
+</body>
+
+</html>
