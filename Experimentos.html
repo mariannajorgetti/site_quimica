@@ -180,148 +180,6 @@
             display: none;
         }
 
-
-        .bico-bunsen {
-            width: 100px;
-            height: 20px;
-            background-color: #878787;
-            /* Esta linha define o fundo cinza */
-            position: relative;
-            margin: 20px auto;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            /* Esta linha cria a sombra */
-            left: 300px;
-            top: -100px;
-        }
-
-
-
-        .bico-bunsen::before {
-            content: '';
-            width: 25px;
-            height: 125px;
-            background-color: #444;
-            position: absolute;
-            top: 150px;
-            left: 40%;
-            transform: translateY(-210%);
-            border-radius: 5px;
-            border: 3px solid #333;
-        }
-
-        .flame {
-            width: 0;
-            height: 0;
-            position: absolute;
-            bottom: 100%;
-            left: 43%;
-            transform: translateY(-250%);
-            transition: width 1s, height 1s, opacity 1s;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 204, 0, 1) 0%, rgba(255, 102, 0, 1) 40%, rgba(255, 0, 0, 0) 100%);
-            opacity: 0;
-            /* Começa invisível */
-            top: -65px;
-        }
-
-        @keyframes flicker {
-            0% {
-                height: 30px;
-                width: 20px;
-                opacity: 1;
-            }
-
-            10% {
-                height: 28px;
-                width: 19px;
-                opacity: 0.9;
-            }
-
-            20% {
-                height: 27px;
-                width: 20px;
-                opacity: 0.85;
-            }
-
-            30% {
-                height: 26px;
-                width: 21px;
-                opacity: 0.8;
-            }
-
-            40% {
-                height: 25px;
-                width: 22px;
-                opacity: 0.75;
-            }
-
-            50% {
-                height: 24px;
-                width: 23px;
-                opacity: 0.8;
-            }
-
-            60% {
-                height: 25px;
-                width: 22px;
-                opacity: 0.75;
-            }
-
-            70% {
-                height: 26px;
-                width: 21px;
-                opacity: 0.8;
-            }
-
-            80% {
-                height: 27px;
-                width: 20px;
-                opacity: 0.85;
-            }
-
-            90% {
-                height: 28px;
-                width: 19px;
-                opacity: 0.9;
-            }
-
-            100% {
-                height: 30px;
-                width: 20px;
-                opacity: 1;
-            }
-        }
-
-        .bico-bunsen:hover .flame {
-            animation: flicker 1s infinite alternate;
-            /* Aumente a duração para suavizar */
-        }
-
-
-        .flame-orange {
-            background: radial-gradient(circle, #FFCC00 0%, #FF6600 40%, rgba(255, 0, 0, 0) 100%);
-        }
-
-        .flame-green {
-            background: radial-gradient(circle, #00FF00 0%, #009600 40%, rgba(0, 0, 0, 0) 100%);
-        }
-
-        .flame-blue {
-            background: radial-gradient(circle, #0000FF 0%, #000096 40%, rgba(0, 0, 0, 0) 100%);
-        }
-
-
-        .bico-container {
-            display: flex;
-            justify-content: flex-start;
-            /* Ajustado para aproximar os bicos */
-            gap: 10px;
-            /* Adicionando um espaço fixo entre os bicos */
-            margin-top: 5px;
-            padding: 0 400px;
-        }
-
         .tower {
             width: 100px;
             height: 400px;
@@ -330,7 +188,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            top: -250px;
+            top: -185px;
             right: -270px;
         }
 
@@ -446,7 +304,7 @@
         }
 
         .ajustar {
-            transform: translateY(-350%);
+            transform: translateY(-318%);
         }
     </style>
 </head>
@@ -496,68 +354,7 @@
 
 
             </div>
-            <div class="bico-container">
-                <div class="bico-bunsen" data-bs-toggle="modal" data-bs-target="#modalOrange">
-                    <div class="flame flame-orange"></div>
-                </div>
-                <div class="bico-bunsen" data-bs-toggle="modal" data-bs-target="#modalGreen">
-                    <div class="flame flame-green"></div>
-                </div>
-                <div class="bico-bunsen" data-bs-toggle="modal" data-bs-target="#modalBlue">
-                    <div class="flame flame-blue"></div>
-                </div>
-            </div>
 
-            <!-- Modal para Bico Laranja -->
-            <div class="modal fade" id="modalOrange" tabindex="-1" aria-labelledby="modalLabelOrange"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalLabelOrange">Bico de Bunsen Laranja</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            O bico de Bunsen laranja é ideal para reações que requerem uma chama mais quente e
-                            brilhante. É amplamente utilizado em experimentos de aquecimento e combustão.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal para Bico Verde -->
-            <div class="modal fade" id="modalGreen" tabindex="-1" aria-labelledby="modalLabelGreen" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalLabelGreen">Bico de Bunsen Verde</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            O bico de Bunsen verde é usado para experimentos que exigem uma chama mais controlada e
-                            menos intensa, ideal para reações mais delicadas.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal para Bico Azul -->
-            <div class="modal fade" id="modalBlue" tabindex="-1" aria-labelledby="modalLabelBlue" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalLabelBlue">Bico de Bunsen Azul</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            O bico de Bunsen azul é ideal para reações que requerem uma chama limpa e controlada, sendo
-                            amplamente utilizado em experimentos de química orgânica.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
 
         <div class="modal fade" id="modaltower" tabindex="-1" aria-labelledby="modalLabeltower" aria-hidden="true">
             <div class="modal-dialog">

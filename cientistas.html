@@ -273,6 +273,7 @@
 
         .modal-content {
             background-color: #fff;
+            color: black;
             margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
@@ -280,6 +281,11 @@
             max-width: 600px;
             border-radius: 5px;
         }
+
+      .dark-mode .modal-content {
+       background-color: #444; /* Modo escuro */
+      color: white; /* Modo escuro */
+      }
 
         .close-button {
             color: #aaa;
@@ -377,6 +383,7 @@
             { name: 'Charles Darwin', letter: 'C', img: 'Fotos/charles_darwin.jpg', bio: 'Naturalista que formulou a teoria da evolução por seleção natural, revolucionando a biologia.' },
             { name: 'David Attenborough', letter: 'D', img: 'Fotos/david_attenborough.jpg', bio: 'Naturalista e apresentador de televisão britânico, conhecido por seus documentários sobre a vida selvagem.' },
             { name: 'Dmitri Mendeleev', letter: 'D', img: 'Fotos/dmitri_mendeleev.jpg', bio: 'Químico que criou a tabela periódica dos elementos, organizando os elementos químicos de forma sistemática.' },
+            { name: 'Daniela da Silva Soncini', letter: 'D', img: 'Fotos/Daniela.jpg', bio: 'Daniela da Silva Soncini, nascida na cidade de Catanduva-SP. Atuamente exerço a função de docente no ensino médio e técnico do Centro Estadual de Tecnologia Paula Souza, na ETEC de Elias Nechar em Catanduva-SP. Possuo as seguintes formações : Instituto Federal de Sertãozinho (Atualmente) – Cursando Mestrando Profissional Em Educação Profissional E Tecnológica Em Rede Nacional (ProfEPT); UNIVERSIDADE FEDERAL DO PIAUÍ (10/2022 a 01/2023) - Especialização em MATEMÁTICA, SUAS TECNOLOGIAS E O MUNDO DO TRABALHO; Centro Universitário ETEP (08/2021 a 05/2022) – Licenciatura em Matemática; Centro Universitário Estácio de Ribeirão Preto (10/2016 a 03/2018) – Titulação: MBA em Segurança da Informação; Instituto Federal de Educação, Ciência e Tecnologia de São Paulo (07/2013 a 07/2014) – Titulação: Técnica em Informática para Internet; Universidade Estadual Paulista “Júlio de Mesquita Filho” (6/2010 a 01/2014) – Titulação: Licenciada em Pedagogia; Faculdade de Educação São Luís (02/2007 a 10/2007) – Titulação: Especialização na área da Educação em Didática e Gestão Pedagógica; Faculdade de Tecnologia de Sorocaba (10/2007 a 06/2008) – Titulação: Licenciatura em Informática; Faculdade de Tecnologia de Taquaritinga (02/1998 a 06/2001) – Titulação: Tecnólogo em Processamento de Dados.' },
             { name: 'Eileen Collins', letter: 'E', img: 'Fotos/eileen_collins.jpg', bio: 'Primeira mulher a comandar uma missão do ônibus espacial da NASA.' },
             { name: 'Enrico Fermi', letter: 'E', img: 'Fotos/enrico_fermi.jpg', bio: 'Físico que trabalhou no desenvolvimento da primeira reação nuclear controlada.' },
             { name: 'Fermat Pierre de', letter: 'F', img: 'Fotos/fermat_pierre_de.jpg', bio: 'Matemático francês conhecido por seu último teorema, que permaneceu não provado até o final do século XX.' },
@@ -401,6 +408,7 @@
             { name: 'Pierre Curie', letter: 'P', img: 'Fotos/pierre_curie.jpg', bio: 'Físico que, junto com sua esposa Marie Curie, fez descobertas importantes sobre a radioatividade.' },
             { name: 'Rosalind Franklin', letter: 'R', img: 'Fotos/rosalind_franklin.jpg', bio: 'Química cuja técnica de difração de raios X foi crucial para a descoberta da estrutura do DNA.' },
             { name: 'Richard Feynman', letter: 'R', img: 'Fotos/richard_feynman.jpg', bio: 'Físico teórico conhecido por suas contribuições à mecânica quântica e por seus livros de divulgação científica.' },
+            { name: 'Sérgio Augusto Pelicano Jr', letter: 'S', img: 'Fotos/Sergio.jpg', bio: 'Mestre em Gestão e Tecnologia em Sistemas Produtivos pela unidade de Pós-Graduação do Centro Paulo Souza, com foco em Ciência da Computação e especialização em Sistemas de Informação. Possuo ampla experiência na área de desenvolvimento de aplicações para dispositivos móveis, destacando o uso da plataforma Delphi Rad 10 para criação de aplicativos voltados para smartphones e tablets. Atualmente, atuo como consultor em projetos que envolvem aplicações móveis para apoiar a gestão de informações, além de estar envolvido no desenvolvimento de um sistema ERP utilizando ASP Net Core e Angular. Essa experiência permite a contribuição significativa na otimização de processos empresariais.Adicionalmente, estou em busca do doutorado na área de Inteligência Artificial e atualmente curso como aluno especial as disciplinas do programa de pós-graduação da UNESP de São Jose do Rio Preto. Essa busca pelo aprofundamento acadêmico reflete meu compromisso contínuo com a pesquisa e a aplicação prática do conhecimento em tecnologia da informação e sistemas de informação.Além disso, desempenho um papel ativo como professor, ministrando disciplinas relacionadas ao desenvolvimento de sistemas, análise de sistemas e gerenciamento de banco de dados. Minha trajetória acadêmica e profissional demonstra minha dedicação à educação e ao avanço do conhecimento na área de tecnologia da informação.' },
             { name: 'Stephen Hawking', letter: 'S', img: 'Fotos/stephen_hawking.jpg', bio: 'Cosmólogo e físico teórico famoso por seu trabalho sobre buracos negros e a teoria do Big Bang.' },
             { name: 'Srinivasa Ramanujan', letter: 'S', img: 'Fotos/srinivasa_ramanujan.jpg', bio: 'Matemático autodidata cuja intuição e habilidades extraordinárias tiveram um impacto duradouro na matemática.' },
             { name: 'Alan Turing', letter: 'T', img: 'Fotos/turing_alan.jpg', bio: 'Matemático e cientista da computação, considerado um dos pais da ciência da computação e da inteligência artificial.' },
@@ -464,18 +472,25 @@
         }
 
         function toggleMode() {
-            const body = document.body;
-            const isLightMode = body.classList.contains('light-mode');
-            if (isLightMode) {
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                document.querySelector('.mode-icon').innerText = '🌞'; // Mudar o ícone para sol no modo escuro
-            } else {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                document.querySelector('.mode-icon').innerText = '🌙'; // Mudar o ícone para lua no modo claro
-            }
-        }
+    const body = document.body;
+    const modal = document.getElementById('scientist-modal');
+    const isLightMode = body.classList.contains('light-mode');
+    
+    if (isLightMode) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        document.querySelector('.mode-icon').innerText = '🌞'; // Ícone do sol
+        modal.classList.remove('light-mode');
+        modal.classList.add('dark-mode');
+    } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        document.querySelector('.mode-icon').innerText = '🌙'; // Ícone da lua
+        modal.classList.remove('dark-mode');
+        modal.classList.add('light-mode');
+    }
+}
+
 
         searchBox.addEventListener('input', (event) => {
             filterBySearch(event.target.value);

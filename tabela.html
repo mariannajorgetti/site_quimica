@@ -306,7 +306,6 @@
 
         /* Mantém o estilo original dos elementos sem interferir nas outras animações */
         .element {
-            none;
         }
 
         .nada {
@@ -1686,29 +1685,42 @@ body.dark-mode {
                 filterElementsByClass("all");  // Mostra todos os elementos
             });
 
-            // Função de pesquisa
-            document.getElementById('search-box').addEventListener('keyup', function () {
-                const query = normalizeString(this.value);
-                const elements = document.querySelectorAll('.element:not(.ignore-me)'); // Seleciona apenas os elementos não ignorados
+ // Função de pesquisa
+document.getElementById('search-box').addEventListener('keyup', function () {
+    const query = normalizeString(this.value);
+    const elements = document.querySelectorAll('.element:not(.ignore-me)'); // Seleciona apenas os elementos não ignorados
 
-                elements.forEach(element => {
-                    const elementName = normalizeString(element.querySelector('.element-name').textContent);
-                    const symbol = normalizeString(element.querySelector('.large').textContent);
+    elements.forEach(element => {
+        const elementName = normalizeString(element.querySelector('.element-name').textContent);
+        const symbol = normalizeString(element.querySelector('.large').textContent);
 
-                    // Mostra o elemento se o nome ou símbolo corresponder à pesquisa
-                    if ((elementName || symbol) && (elementName.includes(query) || symbol.includes(query))) {
-                        element.style.display = 'flex';
-                    } else {
-                        element.style.display = 'none';
-                    }
-                });
+        // Mostra o elemento se o nome ou símbolo corresponder à pesquisa
+        if ((elementName || symbol) && (elementName.includes(query) || symbol.includes(query))) {
+            element.style.display = 'flex';
+        } else {
+            element.style.display = 'none';
+        }
+    });
 
-                // Oculta as divs vazias ao realizar a pesquisa
-                const emptyDivs = document.querySelectorAll('.empty');
-                emptyDivs.forEach(empty => {
-                    empty.style.display = query.length > 0 ? 'none' : 'block'; // Mostra ou esconde dependendo da pesquisa
-                });
-            });
+    // Oculta as divs vazias ao realizar a pesquisa
+    const emptyDivs = document.querySelectorAll('.empty');
+    if (query.length > 0) {
+        emptyDivs.forEach(empty => {
+            empty.style.display = 'none'; // Esconde divs vazias
+        });
+    } else {
+        // Se a pesquisa estiver vazia, mostra as divs vazias e reorganiza a exibição dos elementos
+        emptyDivs.forEach(empty => {
+            empty.style.display = 'block'; // Mostra divs vazias
+        });
+
+        // Opcional: Pode querer exibir todos os elementos de volta
+        elements.forEach(element => {
+            element.style.display = 'flex'; // Mostra todos os elementos
+        });
+    }
+});
+
 
             // Destacar elementos ao passar o mouse na legenda
             document.querySelectorAll('.legend li').forEach(item => {
